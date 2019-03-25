@@ -1,0 +1,31 @@
+#TablaEquipo {
+	border-collapse: collapse
+	border: 1px solid gray;
+	margin-top: 20px;
+}
+
+#FilaPrincipal {
+	background-color: #2E2E2E;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+#FilaCol {
+	background-color: #6E6E6E;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+#listaIntegrantes ul{
+	list-style: none;
+}
+
+#listaDG ul{
+	list-style: none;
+}
+
+#formulario{
+    margin: 0 auto;
+    align-content: center;
+    width: 60%;
+}
