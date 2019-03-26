@@ -48,33 +48,31 @@
 	<?php
 		include("conn/clases.php");
 		$db = new db();
-
+		
 		if (isset($_GET['accion'])) {
-			if ((is_null($email) || empty($email))
-				&& ()
-				&& ()
-				&& ()
-				&& ()
-				&& ()
-				) {
-				
+			if (!empty($_POST['email']) && !empty($_POST['nombre1']) && !empty($_POST['nombre2']) && !empty($_POST['apellido1']) && !empty($_POST['apellido2'])
+				&& !empty($_POST['ciudad']) && !empty($_POST['asunto']) && !empty($_POST['mensaje'])) {
+				$email = $_POST['email'];
+				$nombre1 = $_POST['nombre1'];
+				$nombre2 = $_POST['nombre2'];
+				$apellido1 = $_POST['apellido1'];
+				$apellido2 = $_POST['apellido2'];
+				$ciudad = $_POST['ciudad'];
+				$asunto = $_POST['asunto'];
+				$mensaje = $_POST['mensaje'];
+				$fecha = "NOW()";
+
+				$sql = "INSERT INTO contacto (email, nombre1, nombre2, apellido1, apellido2, ciudad, asunto, mensaje, fecha)
+					VALUES ('".$email."', '".$nombre1."', '".$nombre2."', '".$apellido1."', '".$apellido2."', '".$ciudad."', '".$asunto."', '".$mensaje."' , ". $fecha .")";
+				$db->db_sql($sql);
+				echo "<script>alert('Su correo ha sido enviado. Nos contactaremos con usted.');</script>";
+			} else {
+				echo "<script>alert('Por favor llene los campos obligatorios');</script>";
 			}
-
-			$email = $_POST['email'];
-			$nombre1 = $_POST['nombre1'];
-			$nombre2 = $_POST['nombre2'];
-			$apellido1 = $_POST['apellido1'];
-			$apellido2 = $_POST['apellido2'];
-			$ciudad = $_POST['ciudad'];
-			$asunto = $_POST['asunto'];
-			$mensaje = $_POST['mensaje'];
-
-			$sql = 	"INSERT INTO contacto ('email', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'ciudad', 'asunto', 'mensaje', 'fecha')
-					VALUES (".$email.", ".$nombre1.", ".$nombre2.", ".$apellido1.", ".$apellido2.", ".$ciudad.", ".$asunto.", ".$mensaje." , "..")";
 		}
-		echo $sql;
+		
 	?>
-
+	
 	<div id="formulario">
 		<form action="?accion" method="post">
 			<div class="form-group">
