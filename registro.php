@@ -58,9 +58,10 @@ function EncryptPass($pass){
     <div class="container">
   <div class="row">
   <div class="col-12">
-        <h2>Formulario de Registro</h2>
-        <br>
-        <br>
+    <br>
+    <h2>Registro</h2>
+    <br>
+    <br>
     <form action="registro.php" method="Post">
     <div class="row">
         <div class="form-group col-6">

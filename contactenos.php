@@ -74,6 +74,7 @@
 	?>
 	
 	<div id="formulario">
+		<br>
 		<form action="?accion" method="post">
 			<div class="form-group">
 				<label for="email">Correo</label>

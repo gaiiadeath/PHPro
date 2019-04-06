@@ -26,8 +26,8 @@
 		{
 			$this->db_open();
 			$this->result = $this->connect->query($sql);
-			if($this->connect->connect_error || $this->connect->error){
-				echo "Hubo error: ". $this->connect->connect_error ."  ". $this->connect->error;
+			if($this->connect->connect_errno || $this->connect->error){
+				echo "Hubo error: ". $this->connect->connect_errno ."  ". $this->connect->error;
 			}
 			$this->db_close();
 			return $this->result;
