@@ -3,24 +3,24 @@ include("includes/layout/header.php");
 include("conn/clases.php");
 
 if(isset($_POST["submit"])){
-  if(!isset($_POST["email"])){
+  if(empty($_POST["email"])){
     $emailError = "Por favor ingrese un correo";
-    printError($emailError);
+    echo $emailError;
   }
-  if(!isset($_POST["password"])){
+  if(empty($_POST["password"])){
     $passwordError = "Por favor ingrese una contraseña";
-    printError($passwordError);
+    echo $passwordError;
   }
-  if(!isset($_POST["name"])){
+  if(empty($_POST["name"])){
     $nameError = "Por favor ingrese un nombre";
-    printError($nameError);
+    echo $nameError;
   }
-  if(!isset($_POST["lastName"])){
+  if(empty($_POST["lastName"])){
     $lastNameError = "Por favor ingrese un apellido";
-    printError($lastNameError);
+    echo $lastNameError;
   }
   if(isset($emailError) || isset($passwordError) || isset($nameError) || isset($lastNameError)){
-    printError("Ocurrió un error en el registro");
+    echo "<br><br> Todos campos con * son obligatorios por lo cual no  se creó el registro de usuario";
   }else{
     $name = $_POST["name"];
     $secondName = $_POST["secName"];
@@ -65,7 +65,7 @@ function EncryptPass($pass){
     <form action="registro.php" method="Post">
     <div class="row">
         <div class="form-group col-6">
-          <label for="name">Primer Nombre</label>
+          <label for="name">* Primer Nombre</label>
           <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Primer Nombre">
         </div>
         <div class="form-group col-6">
@@ -75,7 +75,7 @@ function EncryptPass($pass){
     </div>
       <div class="row">
         <div class="form-group col-6">
-          <label for="lastName">Primer Apellido</label>
+          <label for="lastName">* Primer Apellido</label>
           <input type="text" class="form-control" id="lastName" name="lastName" aria-describedby="emailHelp" placeholder="Apellidos">
         </div>
 
@@ -86,13 +86,13 @@ function EncryptPass($pass){
       </div>
       <div class="row">
       <div class="form-group col-6">
-        <label for="email">Dirección de Correo</label>
+        <label for="email">* Dirección de Correo</label>
         <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Ingresa el Correo" name="email">
         <small id="emailHelp" class="form-text text-muted">La dirección de correo es secreta</small>
       </div>
       <br>
       <div class="form-group col-6">
-        <label for="password">Contraseña</label>
+        <label for="password">* Contraseña</label>
         <input type="password" class="form-control" id="password" placeholder="contraseña" name="password">
       </div>
       </div>
