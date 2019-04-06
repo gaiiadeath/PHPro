@@ -15,7 +15,7 @@ if(isset($_POST["Ingresar"])){
     if(password_verify($password, $row['password'])){ ?>
       <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Bienvenido!</strong> <?php echo "Bienvenido, ". $row['nombre1'] . " " . $row['apellido1'] ?>
+        <strong>Bienvenido!</strong> <?php echo "<br>". $row['nombre1'] . " " . $row['apellido1'] ?>
       </div>
     <?php }else{ ?>
       <div class="alert alert-warning alert-dismissible fade show">
