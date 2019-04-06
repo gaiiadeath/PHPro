@@ -34,8 +34,8 @@ if(isset($_POST["submit"])){
 
 function RegisterUSer($name, $secondName, $lastName, $secLastName, $email, $password){
   $password = EncryptPass($password);
-  $sql = "INSERT INTO usuarios (email, password, nombre1, nombre2, apellido1, apellido2, fecha_registro) 
-          values('$email', '$password', '$name', '$secondName', '$lastName', '$secLastName', CURRENT_TIMESTAMP)";
+  $sql = "INSERT INTO usuarios (email, password, nombre1, nombre2, apellido1, apellido2, rol, fecha_registro, estado, acceso, fecha_acceso) 
+          values('$email', '$password', '$name', '$secondName', '$lastName', '$secLastName', '1',CURRENT_TIMESTAMP, '1', '0', CURDATE())";
   $db = new db();
   $result = $db->db_sql($sql);
   if(!$result){
