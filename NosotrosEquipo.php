@@ -46,18 +46,23 @@
 	</ul>
 
 	<div>
-		<img src="img/PPI620304_perfil.png" class="d-block w-100" alt="...">
-	</div>
-
-	<div align="center">
 		<?php
 			include("conn/clases.php");
 			$db = new db();
 
-			$sql = "SELECT * FROM perfilequipo";
+			$sql = "SELECT * FROM perfilequipo WHERE idequipo = 'PPI620304'";
 			$result = $db->db_sql($sql);
 			$row = $result->fetch_assoc();
 		?>
+		<!-- Imprimir ruta de imágen de equipo -->
+		<?php
+			echo "<img src='img/" . $row['foto'] . "' class='d-block w-100' alt='...'>";
+		?>
+
+	</div>
+
+	<div align="center">
+		
 
 		<table id="TablaEquipo" border="1" width="900">
 			<tr>

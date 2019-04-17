@@ -58,11 +58,11 @@
 		<h1 align="center">Nuestros integrantes</h1>
 		<p>En esta sección se encuentran los perfiles de cada uno de nuestros integrantes:</p>
 		<ul>
-			<li><a href="integrantes/ArleyGonzalez.php">Arley Gonzalez</a></li>
-			<li><a href="integrantes/BryanGallego.php">Bryan Gallego</a></li>
-			<li><a href="integrantes/CamiloVillada.php">Camilo Villada</a></li>
-			<li><a href="integrantes/JuanEscudero.php">Juan Escudero</a></li>
-			<li><a href="integrantes/RonaldoMejia.php">Ronaldo Mejia</a></li>
+			<li><a href="integrantes/integrantesPlantilla.php/?id=1128417142">Arley Gonzalez</a></li>
+			<li><a href="integrantes/integrantesPlantilla.php/?id=1017175221">Bryan Gallego</a></li>
+			<li><a href="integrantes/integrantesPlantilla.php/?id=1017188532">Camilo Villada</a></li>
+			<li><a href="integrantes/integrantesPlantilla.php/?id=1020435276">Juan Escudero</a></li>
+			<li><a href="integrantes/integrantesPlantilla.php/?id=1003307914">Ronaldo Mejia</a></li>
 		</ul>
 	</div>
 
