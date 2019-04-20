@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>PHPro</title>
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/phproStyle.css">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -27,6 +26,13 @@
 <?php 
 include("includes/layout/header.php");
 include("conn/clases.php");
+
+if (isset($_POST['Recuperar'])) { ?>
+  <div class="alert alert-success container">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>La contraseña ha sido enviada con éxito al correo  <?php echo $_POST['recuperarPass'] ?></strong>
+  </div>
+<?php }
 
 if (isset($_POST["Salir"])) {
   $email = $_POST["emailLog"];
@@ -76,17 +82,24 @@ if(isset($_POST["Ingresar"])){
           $row = $result->fetch_assoc();
           echo "Logueo actualizado ".$row['acceso']. " y ".$row['fecha_acceso'];
       }
-    }else{ ?>
+    }elseif($email == $row['email']){ ?>
+      <div class="alert alert-warning container" id="mensajeRecuperar contraseña">
+        <form method="POST">
+          <input type="email" name="recuperarPass" id="recuperarPass" style="display: none" value="<?php echo $email ?>">        
+          <p>La contraseña no es válida. <br> Si desea recuperarla, por favor dé clic en:</p>
+          <button type="submit" class="btn" name="Recuperar" id="Recuperar">Recuperar contraseña</button>
+        </form>
+      </div>
+    <?php }else{ ?>
       <div class="alert alert-warning container" id="mensaje">
         <!--<button type="button" class="close" data-dismiss="alert">&times;</button>-->
-        <p>El usuario o contraseña son inválidos.<br> Por favor <a href="logeo.php">inténtelo de nuevo</a> o<a href="registro.php"> regístrese como nuevo usuario</a></p>
+        <p>El usuario no está registrado<br> Por favor <a href="logeo.php">inténtelo de nuevo</a> o<a href="registro.php"> regístrese como nuevo usuario</a></p>
       </div>
     <?php }
   }
 }else{ ?>
 <head>
   <meta charset="UTF-8">
-  <title>PHPro</title>
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/phproStyle.css">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
