@@ -44,7 +44,10 @@ function ValidarUsuario($email){
   $row = $result->fetch_assoc();
 
   if(!is_null($row)){
-    echo "El correo ya se registró.";
+    echo "<div class='alert alert-warning container' id='mensaje' align='center' style='width:40%; margin-top: 15px'>
+        <!--<button type='button' class='close' data-dismiss='alert'>&times;</button>-->
+        <p>El correo a registrar, ya existe.<br> Por favor inténtelo de nuevo.</p>
+        </div>";
     return "1";
   }
 }
@@ -56,10 +59,16 @@ function RegisterUser($name, $secondName, $lastName, $secLastName, $email, $pass
   $db = new db();
   $result = $db->db_sql($sql);
   if(!$result){
-    echo "Error al registrar el usuario ". $result;
+    echo "<div class='alert alert-warning container' id='mensaje' align='center' style='width:40%; margin-top: 15px'>
+        <!--<button type='button' class='close' data-dismiss='alert'>&times;</button>-->
+        <p>Error al registrar el usuario:<br>".$result."</p>
+        </div>";
     return;
   }
-  echo "Usuario Registrado con éxito";
+  echo "<div class='alert alert-success container' id='mensaje' align='center' style='width:40%; margin-top: 15px'>
+        <!--<button type='button' class='close' data-dismiss='alert'>&times;</button>-->
+        <p>El usuario se registró con éxito.<br> Muchas gracias por tu registro.<br><br> ¡BIENVENID@!.</p>
+        </div>";
   if(is_object($result)){
     $row = $result->fetch_assoc();
     return $row;
