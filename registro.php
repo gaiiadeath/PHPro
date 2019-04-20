@@ -28,11 +28,28 @@ if(isset($_POST["submit"])){
     $secLastName = $_POST["secLastName"];
     $email = $_POST["email"];
     $password = $_POST["password"];
-    RegisterUser($name, $secondName, $lastName, $secLastName, $email, $password);
+
+
+    if(empty(ValidarUsuario($email))){
+      RegisterUser($name, $secondName, $lastName, $secLastName, $email, $password);
+    }
   }
 }
 
-function RegisterUSer($name, $secondName, $lastName, $secLastName, $email, $password){
+function ValidarUsuario($email){
+  $sql = "SELECT * FROM usuarios WHERE email = '".$email."'";
+  
+  $db = new db();
+  $result = $db->db_sql($sql);
+  $row = $result->fetch_assoc();
+
+  if(!is_null($row)){
+    echo "El correo ya se registró.";
+    return "1";
+  }
+}
+
+function RegisterUser($name, $secondName, $lastName, $secLastName, $email, $password){
   $password = EncryptPass($password);
   $sql = "INSERT INTO usuarios (email, password, nombre1, nombre2, apellido1, apellido2, rol, fecha_registro, estado, acceso, fecha_acceso) 
           values('$email', '$password', '$name', '$secondName', '$lastName', '$secLastName', '1',CURRENT_TIMESTAMP, '1', '0', CURDATE())";
@@ -97,7 +114,7 @@ function EncryptPass($pass){
         </div>
       </div>
       <div>
-        <p style="color: red">Todos los campos señalados con * son obligatorios</p>
+        <p style="color: red">Todos los señalados con * son obligatorios</p>
       </div>
       <button type="submit" class="btn btn-primary" name="submit">Enviar</button>
     </form>
