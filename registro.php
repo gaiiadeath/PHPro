@@ -97,7 +97,7 @@ function EncryptPass($pass){
         </div>
       </div>
       <div>
-        <p style="color: red">Todos los señalados con * son obligatorios</p>
+        <p style="color: red">Todos los campos señalados con * son obligatorios</p>
       </div>
       <button type="submit" class="btn btn-primary" name="submit">Enviar</button>
     </form>

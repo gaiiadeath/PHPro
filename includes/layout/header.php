@@ -22,7 +22,7 @@
 		<li class="nav-item dropdown">
 		    <a class="nav-link  dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nosotros</a>
 		    <div class="dropdown-menu">
-				<a class="dropdown-item " href="#">Equipo PHPro</a>
+				<a class="dropdown-item " href="NosotrosEquipo.php">Equipo PHPro</a>
 				<a class="dropdown-item" href="NosotrosIntegrantes.php">Integrantes</a>
 		    </div>
 		</li>		
