@@ -90,6 +90,26 @@ if(isset($_GET['email'])){
   <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/index.css}">
 </head>
 <body>
+<header>
+        <ul class="nav nav-tabs" id="cuenta">
+          <li>
+            <label type="text" for="email" class="label" id="label"><?php echo $email ?></label>
+          </li>         
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mi cuenta</a>
+              <div class="dropdown-menu">
+              <a class="dropdown-item" href="miperfil.php?email=<?php echo $email ?>">Mi perfil</a>
+              <a class="dropdown-item" href="#">Mis contactos</a>
+              </div>
+          </li>
+          <li>
+            <form method="POST">
+              <input type="email" name="emailLog" id="emailLog" class="form-control" value="<?php echo $email ?>">
+              <button type="submit" class="btn btn-primary" name="Salir" id="Salir" style="height:42px; width:100px">Salir  <i class="fas fa-sign-out-alt"></i></button>
+            </form>     
+          </li>
+        </ul> 
+      </header>
 <div class="container form-group">
         <?php
             if(isset($email)){?>
