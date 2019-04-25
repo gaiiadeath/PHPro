@@ -32,6 +32,23 @@
 			$this->db_close();
 			return $this->result;
 		}
+
+		function db_ingresar($email, $password){
+			$sql = "SELECT * FROM usuarios WHERE email = $email";
+			$result = $this->db_sql($sql);
+			if ($result->num_rows == 1) {
+				echo "Usuario encontrado<br>";
+				$datos = $result-<fetch_assoc();
+
+				if(password_verify($password, $datos['password'])){
+					echo "Contraseña correcta<br>";
+				}else{
+					echo "Contraseña incorrecta<br>";
+				}
+			} else {
+				echo "Usuario no encontrado<br>";
+			}
+		}
 	}
 
 ?>
