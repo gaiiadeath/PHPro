@@ -38,8 +38,12 @@ if (isset($_POST["Salir"])) {
   $email = $_POST["emailLog"];
   $sql = "UPDATE usuarios SET acceso = '0' WHERE email = '$email'";
   $db = new db();
-  $result = $db->db_sql($sql);
-}
+  $result = $db->db_sql($sql);?>
+  <div class="alert alert-success container">
+    <strong>Su sesión ha sido cerrada con éxito, gracias por su visita</strong>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+<?php }
 
 if(isset($_POST["Ingresar"])){
   $email = $_POST["email"];
@@ -56,18 +60,18 @@ if(isset($_POST["Ingresar"])){
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <strong>Bienvenido!</strong> <?php echo "<br> ". $row['nombre1'] . " " . $row['apellido1'] ?>
       </div>*/
-      $sql = "UPDATE usuarios SET acceso = '1', fecha_acceso = CURDATE() WHERE email = '$email'";
+      $sql = "UPDATE usuarios SET acceso = '1', fecha_acceso = NOW() WHERE email = '$email'";
       $result = $db->db_sql($sql);?>
       <header>
         <ul class="nav nav-tabs" id="cuenta">
           <li>
             <label type="text" for="email" class="label" id="label"><?php echo $email ?></label>
-          </li>         
+          </li>
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mi cuenta</a>
               <div class="dropdown-menu">
               <a class="dropdown-item" href="miperfil.php?email=<?php echo $email ?>">Mi perfil</a>
-              <a class="dropdown-item" href="#">Mis contactos</a>
+              <a class="dropdown-item" href="miscontactos.php?email=<?php echo $email ?>">Mis contactos</a>
               </div>
           </li>
           <li>
