@@ -42,8 +42,11 @@
 
 				if(password_verify($password, $datos['password'])){
 					echo "Contraseña correcta<br>";
+					$_SESSION['$logueo'] = true;
+					$sql = "UPDATE usuarios SET acceso = 1, fecha_acceso = NOW()";
 				}else{
 					echo "Contraseña incorrecta<br>";
+					session_destroy();
 				}
 			} else {
 				echo "Usuario no encontrado<br>";
