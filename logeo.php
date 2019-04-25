@@ -66,7 +66,7 @@ if(isset($_POST["Ingresar"])){
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mi cuenta</a>
               <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Mi perfil</a>
+              <a class="dropdown-item" href="miperfil.php?email=<?php echo $email ?>">Mi perfil</a>
               <a class="dropdown-item" href="#">Mis contactos</a>
               </div>
           </li>
