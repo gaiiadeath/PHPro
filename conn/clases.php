@@ -38,7 +38,7 @@
 			$result = $this->db_sql($sql);
 			if ($result->num_rows == 1) {
 				echo "Usuario encontrado<br>";
-				$datos = $result-<fetch_assoc();
+				$datos = $result->fetch_assoc();
 
 				if(password_verify($password, $datos['password'])){
 					echo "Contraseña correcta<br>";
