@@ -98,9 +98,7 @@ function RegisterUser($name, $secondName, $lastName, $secLastName, $email, $pass
 
           Te esperamos pronto. <br><br>
 
-          El equipo de PHP ITM
-        ";
-
+          El equipo de PHPro";
 
         $db->enviar($paraquien,$asunto,$mensaje);
 

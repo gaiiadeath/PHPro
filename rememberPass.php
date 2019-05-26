@@ -1,13 +1,64 @@
 <?php 
 include('includes/layout/header.php');
+include("conn/clases.php");
+
+$passAleatoria = "";
+$passEnctipt = "";
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+} 
+
+function validarCorreo($email){
+  $db = new db();
+  $sql = "SELECT email FROM usuarios WHERE email = '$email'";
+  $result = $db->db_sql($sql);
+  if ($result->num_rows == 1) {
+    //usuario encontrado
+    $passAleatoria = generateRandomString();
+    $passEnctipt = password_hash($passAleatoria, PASSWORD_DEFAULT);
+
+
+    $sql = "UPDATE usuarios SET password = '$passEnctipt' WHERE email = '$email'";
+    $db->db_sql($sql);
+    return $passAleatoria;
+  }
+}
 
 if (isset($_POST['Enviar'])) {
-	if (!empty($_POST['email'])) {?>
+	if (!empty($_POST['email'])) {
+    $passAleatoria = validarCorreo($_POST['email']);
+    if(!is_null($passAleatoria)){
+      //Enviar correo
+      $paraquien = $_POST['email'];
+      $asunto = "Recuperación de contraseña";
+      $mensaje = "
+        La contraseña temporal es $passAleatoria<br>
+        Nuevamente te esperamos pronto. <br><br>
+
+        El equipo de PHPro";
+      $db = new db();
+      $db->enviar($paraquien,$asunto,$mensaje);
+      echo $mensaje;      
+?>
 			<div class="alert alert-success container">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<p>La contraseña ha sido enviada satisfactoriamente</p> <?php echo "al correo ". $_POST['email'] ?>
+				<p>La contraseña ha sido enviada satisfactoriamente <?php echo "al correo ". $_POST['email'] ?></p>
 			</div>
-	<?php }
+<?php    
+      } else {
+      ?>
+      <div class="alert alert-success container">
+          <p>El correo <?php echo $_POST['email'] . " no es valido" ?></p>
+      </div>
+      <?php
+    }
+  }
 }
 ?>
 
