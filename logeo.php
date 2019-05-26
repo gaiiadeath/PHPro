@@ -27,13 +27,6 @@
 include("includes/layout/header.php");
 include("conn/clases.php");
 
-if (isset($_POST['Recuperar'])) { ?>
-  <div class="alert alert-success container">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>La contraseña ha sido enviada con éxito al correo  <?php echo $_POST['recuperarPass'] ?></strong>
-  </div>
-<?php }
-
 if (isset($_POST["Salir"])) {
   $email = $_POST["emailLog"];
   $sql = "UPDATE usuarios SET acceso = '0' WHERE email = '$email'";
@@ -83,11 +76,11 @@ if(isset($_POST["Ingresar"])){
           echo "Logueo actualizado ".$row['acceso']. " y ".$row['fecha_acceso'];
       }
     }elseif($email == $row['email']){ ?>
-      <div class="alert alert-warning container" id="mensajeRecuperar contraseña">
+      <div class="alert alert-warning container" id="mensajeRecuperar contraseña" align="center">
         <form method="POST">
           <input type="email" name="recuperarPass" id="recuperarPass" style="display: none" value="<?php echo $email ?>">        
           <p>La contraseña no es válida. <br> Si desea recuperarla, por favor dé clic en:</p>
-          <button type="submit" class="btn" name="Recuperar" id="Recuperar">Recuperar contraseña</button>
+          <a href="rememberPass.php">Recuperar contraseña</a>
         </form>
       </div>
     <?php }else{ ?>
