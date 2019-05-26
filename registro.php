@@ -1,6 +1,17 @@
 <?php 
+session_start();
+
+error_reporting(E_ERROR);
+
 include("includes/layout/header.php");
 include("conn/clases.php");
+
+$name = "";
+$secondName = "";
+$lastName = "";
+$secLastName = "";
+$email ="";
+$password = "";
 
 if(isset($_POST["submit"])){
   if(empty($_POST["name"])){
@@ -57,18 +68,42 @@ function RegisterUser($name, $secondName, $lastName, $secLastName, $email, $pass
   $sql = "INSERT INTO usuarios (email, password, nombre1, nombre2, apellido1, apellido2, rol, fecha_registro, estado, acceso, fecha_acceso) 
           values('$email', '$password', '$name', '$secondName', '$lastName', '$secLastName', '1',CURRENT_TIMESTAMP, '1', '0', CURDATE())";
   $db = new db();
-  $result = $db->db_sql($sql);
-  if(!$result){
-    echo "<div class='alert alert-warning container' id='mensaje' align='center' style='width:40%; margin-top: 15px'>
-        <!--<button type='button' class='close' data-dismiss='alert'>&times;</button>-->
-        <p>Error al registrar el usuario:<br>".$result."</p>
-        </div>";
-    return;
-  }
+   $result = $db->db_sql($sql);
+
+   if(!$result){
+     echo "<div class='alert alert-warning container' id='mensaje' align='center' style='width:40%; margin-top: 15px'>
+         <!--<button type='button' class='close' data-dismiss='alert'>&times;</button>-->
+         <p>Error al registrar el usuario:<br>".$result."</p>
+         </div>";
+     return;
+   }
+  if(1==1){}
   echo "<div class='alert alert-success container' id='mensaje' align='center' style='width:40%; margin-top: 15px'>
         <!--<button type='button' class='close' data-dismiss='alert'>&times;</button>-->
         <p>El usuario se registró con éxito.<br> Muchas gracias por tu registro.<br><br> ¡BIENVENID@!.</p>
         </div>";
+
+        $paraquien = "$name $lastName <$email>";
+        $asunto = "Registro Exitoso";
+        $mensaje = "
+          Hola $name <br>
+          Tu registro ha sido exitoso. Bienvenido a nuestro Sitio Web ¡PHPro! <br><br>
+
+          A continuación, una copia de los datos que has suministrado: <br><br>
+
+          Nombres: $name $secondName <br>
+          Apellidos: $lastName $secLastName <br>
+          Email: $email <br>
+          <br>
+
+          Te esperamos pronto. <br><br>
+
+          El equipo de PHP ITM
+        ";
+
+
+        $db->enviar($paraquien,$asunto,$mensaje);
+
   if(is_object($result)){
     $row = $result->fetch_assoc();
     return $row;
