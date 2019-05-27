@@ -1,5 +1,7 @@
 <?php
+    session_start();
 	error_reporting(E_ERROR | E_NOTICE);
+	include("conn/seguridad.php");
 
 	class db
 	{
@@ -42,10 +44,11 @@
 
 				if(password_verify($password, $datos['password'])){
 					echo "Contraseña correcta<br>";
-					$_SESSION['$logueo'] = true;
+					$_SESSION['$logueo'] = logueo_autorizado();
 					$sql = "UPDATE usuarios SET acceso = 1, fecha_acceso = NOW()";
 				}else{
 					echo "Contraseña incorrecta<br>";
+					$_SESSION['$logueo'] = salir();
 					session_destroy();
 				}
 			} else {
