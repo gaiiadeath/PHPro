@@ -26,12 +26,14 @@
 <?php 
 include("includes/layout/header.php");
 include("conn/clases.php");
+include("conn/seguridad.php");
 
 if (isset($_POST["Salir"])) {
   $email = $_POST["emailLog"];
   $sql = "UPDATE usuarios SET acceso = '0' WHERE email = '$email'";
   $db = new db();
   $result = $db->db_sql($sql);
+  $salir = salir();
 }
 
 if(isset($_POST["Ingresar"])){
