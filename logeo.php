@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,66 +21,17 @@ session_start();
 
   <!--Nuestro css-->
   <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/index.css}">
-
-  <title>PHPro</title>
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/phproStyle.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
-<body>
-  <div align="center" style="margin-top: 15px">
-    <header>
-      <img src="img/Logo.png" width="150">
-    </header>    
-  </div>
-  
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link" target="blank" href="index.php">Inicio</a>
-    </li>
-    <li class="nav-item dropdown">
-        <a class="nav-link  dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nosotros</a>
-        <div class="dropdown-menu">
-        <a class="dropdown-item " target="blank" href="NosotrosEquipo.php">Equipo PHPro</a>
-        <a class="dropdown-item" target="blank" href="NosotrosIntegrantes.php">Integrantes</a>
-        </div>
-    </li>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Servicios</a>
-        <div class="dropdown-menu">
-        <a class="dropdown-item" target="blank" href="serviciosDW.php">Diseño web</a>
-        <a class="dropdown-item" target="blank" href="serviciosDS.php">Desarrollo de software</a>
-        <a class="dropdown-item" target="blank" href="serviciosDG.php">Diseño gráfico</a>
-        </div>
-    </li> 
-    <li class="nav-item">
-      <a class="nav-link" target="blank" href="contactenos.php">Contáctenos</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" target="blank" href="registro.php">Registro</a>
-    </li>
-  </ul>
 
-<?php
-//include("includes/layout/header.php");
+<?php 
+include("includes/layout/header.php");
 include("conn/clases.php");
-
-if (isset($_POST['Recuperar'])) { ?>
-  <div class="alert alert-success container">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>La contraseña ha sido enviada con éxito al correo  <?php echo $_POST['recuperarPass'] ?></strong>
-  </div>
-<?php }
 
 if (isset($_POST["Salir"])) {
   $email = $_POST["emailLog"];
   $sql = "UPDATE usuarios SET acceso = '0' WHERE email = '$email'";
   $db = new db();
   $result = $db->db_sql($sql);
-  session_unset();
-  session_destroy();
 }
 
 if(isset($_POST["Ingresar"])){
@@ -96,56 +44,43 @@ if(isset($_POST["Ingresar"])){
 
   if(is_object($result)){
     $row = $result->fetch_assoc();
-    $_SESSION['user'] = $row['email'];
-    $_SESSION['password'] = $row['password'];
-    $_SESSION['nombre1'] = $row['nombre1'];
-    $_SESSION['nombre2'] = $row['nombre2'];
-    $_SESSION['apellido1'] = $row['apellido1'];
-    $_SESSION['apellido2'] = $row['apellido2'];
-    $_SESSION['fecha_registro'] = $row['fecha_registro'];
-    $_SESSION['estado'] = $row['estado']? "Activo": "Inactivo";
-    $_SESSION['fecha_acceso'] = $row['fecha_acceso'];
-    $_SESSION['rol'] = $row['rol'];
-    $_SESSION['acceso'] = $row['acceso'];
-
-    if(password_verify($password, $_SESSION['password']) && $email == $_SESSION['user']){
+    if(password_verify($password, $row['password']) && $email == $row['email']){
       /*<div class="alert alert-success container">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <strong>Bienvenido!</strong> <?php echo "<br> ". $row['nombre1'] . " " . $row['apellido1'] ?>
       </div>*/
-      $sql = "UPDATE usuarios SET acceso = '1', fecha_acceso = NOW() WHERE email = '$email'";
-      $result = $db->db_sql($sql);
-      $_SESSION['logueo'] = true;?>
+      $sql = "UPDATE usuarios SET acceso = '1', fecha_acceso = CURDATE() WHERE email = '$email'";
+      $result = $db->db_sql($sql);?>
       <header>
         <ul class="nav nav-tabs" id="cuenta">
           <li>
-            <label type="text" for="email" class="label" id="label"><?php echo $_SESSION['user'] ?></label>
-          </li>
+            <label type="text" for="email" class="label" id="label"><?php echo $email ?></label>
+          </li>         
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mi cuenta</a>
               <div class="dropdown-menu">
-              <a class="dropdown-item" href="miperfil.php">Mi perfil</a>
-              <a class="dropdown-item" href="miscontactos.php">Mis contactos</a>
-              <?php if($_SESSION['rol'] == 1): ?>
-                  <a class="dropdown-item" href="administracion.php">Administración</a>
-             <?php endif; ?>
+              <a class="dropdown-item" href="miperfil.php?email=<?php echo $email ?>">Mi perfil</a>
+              <a class="dropdown-item" href="#">Mis contactos</a>
               </div>
           </li>
           <li>
             <form method="POST">
               <input type="email" name="emailLog" id="emailLog" class="form-control" value="<?php echo $email ?>">
               <button type="submit" class="btn btn-primary" name="Salir" id="Salir" style="height:42px; width:100px">Salir  <i class="fas fa-sign-out-alt"></i></button>
-            </form>
+            </form>     
           </li>
         </ul> 
       </header>
-    <?php
-    }elseif($email == $_SESSION['user']){ ?>
-      <div class="alert alert-warning container" id="mensajeRecuperar contraseña">
+      <?php if (is_object($result)) {
+          $row = $result->fetch_assoc();
+          echo "Logueo actualizado ".$row['acceso']. " y ".$row['fecha_acceso'];
+      }
+    }elseif($email == $row['email']){ ?>
+      <div class="alert alert-warning container" id="mensajeRecuperar contraseña" align="center">
         <form method="POST">
           <input type="email" name="recuperarPass" id="recuperarPass" style="display: none" value="<?php echo $email ?>">        
           <p>La contraseña no es válida. <br> Si desea recuperarla, por favor dé clic en:</p>
-          <button type="submit" class="btn" name="Recuperar" id="Recuperar">Recuperar contraseña</button>
+          <a href="rememberPass.php">Recuperar contraseña</a>
         </form>
       </div>
     <?php }else{ ?>

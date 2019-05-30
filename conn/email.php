@@ -10,7 +10,7 @@ class email{
 		$mensaje = plantilla($paraquien, $asunto, $mensaje);
 
 		mail($emailRecibe, $asunto, $mensaje, $emailEnvia);
-		header("Location:email.php")
+		header("Location:email.php");
 	}
 
 	function plantilla($paraquien, $asunto, $mensaje, $name, $secondName, $lastName, $secLastName, $email, $password){
