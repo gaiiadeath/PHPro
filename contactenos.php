@@ -50,7 +50,7 @@
 		include("conn/email.php");
 
 		$db = new db();
-		$EnviarEmail = new email();
+		$correo = new email();
 		
 		if (isset($_GET['accion'])) {
 			if (!empty($_POST['email']) && !empty($_POST['nombre1']) && !empty($_POST['apellido1'])
@@ -64,6 +64,8 @@
 				$asunto = $_POST['asunto'];
 				$mensaje = $_POST['mensaje'];
 				$fecha = "NOW()";
+
+				$paraSplit = "$email|$nombre1|$nombre2|$apellido1|$apellido2|$ciudad|$asunto";
 
 				$sql = "INSERT INTO contacto (email, nombre1, nombre2, apellido1, apellido2, ciudad, asunto, mensaje, fecha)
 					VALUES ('".$email."', '".$nombre1."', '".$nombre2."', '".$apellido1."', '".$apellido2."', '".$ciudad."', '".$asunto."', '".$mensaje."' , ". $fecha .")";
@@ -102,8 +104,7 @@
 
 				        El equipo de PHPro";
 				    
-				    $correo = new email();
-      				$correo->enviar($paraquien,$asunto,$mensaje);  
+      				$correo->enviar($paraquien,$asunto,$mensaje, "Contacto");
 			    }
 			} else {
 				echo "<div class='alert alert-warning container' id='mensaje' align='center' style='width:40%; margin-top: 15px'>

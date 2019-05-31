@@ -12,6 +12,7 @@ $lastName = "";
 $secLastName = "";
 $email ="";
 $password = "";
+$paraSplit = "";
 
 if(isset($_POST["submit"])){
   if(empty($_POST["name"])){
@@ -40,6 +41,7 @@ if(isset($_POST["submit"])){
     $email = $_POST["email"];
     $password = $_POST["password"];
 
+    $paraSplit = "$name|$secondName|$lastName|$secLastName|$email|$password";
 
     if(empty(ValidarUsuario($email))){
       RegisterUser($name, $secondName, $lastName, $secLastName, $email, $password);
@@ -68,7 +70,9 @@ function RegisterUser($name, $secondName, $lastName, $secLastName, $email, $pass
   $sql = "INSERT INTO usuarios (email, password, nombre1, nombre2, apellido1, apellido2, rol, fecha_registro, estado, acceso, fecha_acceso) 
           values('$email', '$password', '$name', '$secondName', '$lastName', '$secLastName', '1',CURRENT_TIMESTAMP, '1', '0', CURDATE())";
   $db = new db();
-   $result = $db->db_sql($sql);
+  $result = $db->db_sql($sql);
+
+  $correo = new email();
 
    if(!$result){
      echo "<div class='alert alert-warning container' id='mensaje' align='center' style='width:40%; margin-top: 15px'>
@@ -100,7 +104,7 @@ function RegisterUser($name, $secondName, $lastName, $secLastName, $email, $pass
 
           El equipo de PHPro";
 
-        $db->enviar($paraquien,$asunto,$mensaje);
+        $correo->enviar($paraquien,$asunto,$mensaje, "Registro");
 
   if(is_object($result)){
     $row = $result->fetch_assoc();
