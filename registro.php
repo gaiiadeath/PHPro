@@ -5,6 +5,7 @@ error_reporting(E_ERROR);
 
 include("includes/layout/header.php");
 include("conn/clases.php");
+include("conn/email.php");
 
 $name = "";
 $secondName = "";
