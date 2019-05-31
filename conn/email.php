@@ -1,6 +1,6 @@
 <?php 
 class email{
-	function enviar($paraquien, $asunto, $mensaje, $name, $secondName, $lastName, $secLastName, $email, $password){
+	function enviar($paraquien, $asunto, $mensaje){
 		$cabeceras =  'From: bryanstiv10@gmail.com' . "\r\n";
    		$cabeceras .= 'Reply-To: bryanstiv10@gmail.com' . "\r\n";
    		$cabeceras .= 'X-Mailer: PHP/' . phpversion();
@@ -10,7 +10,7 @@ class email{
 		$mensaje = plantilla($paraquien, $asunto, $mensaje);
 
 		mail($emailRecibe, $asunto, $mensaje, $emailEnvia);
-		header("Location:email.php");
+		header("Location:index.php");
 	}
 
 	function plantilla($paraquien, $asunto, $mensaje, $name, $secondName, $lastName, $secLastName, $email, $password){
