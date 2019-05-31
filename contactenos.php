@@ -47,7 +47,10 @@
 	
 	<?php
 		include("conn/clases.php");
+		include("conn/email.php");
+
 		$db = new db();
+		$EnviarEmail = new email();
 		
 		if (isset($_GET['accion'])) {
 			if (!empty($_POST['email']) && !empty($_POST['nombre1']) && !empty($_POST['apellido1'])
@@ -85,6 +88,22 @@
 			        <!--<button type='button' class='close' data-dismiss='alert'>&times;</button>-->
 			        <p>Le agradecemos por diligenciar el formulario.<br>Su correo ha sido enviado y pronto nos contactaremos con usted.</p>
 			        </div>";	// EXISTE
+
+			        $paraquien = "$nombre1 $apellido1 <$email>";
+				    $asunto = "$asunto";
+				    $mensaje = "Le agradecemos por diligenciar el formulario.<br>Su correo ha sido enviado y pronto nos contactaremos con usted.<br><br>
+
+						Correo: $email <br>
+						Nombres: $nombre1 $nombre2 <br>
+						Apellidos: $apellido1 $apellido2 <br>
+						Ciudad: $ciudad <br>
+						Asunto: $asunto <br>
+						Mensaje: $mensaje <br><br>
+
+				        El equipo de PHPro";
+				    
+				    $correo = new email();
+      				$correo->enviar($paraquien,$asunto,$mensaje);  
 			    }
 			} else {
 				echo "<div class='alert alert-warning container' id='mensaje' align='center' style='width:40%; margin-top: 15px'>
