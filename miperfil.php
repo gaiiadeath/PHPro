@@ -3,7 +3,7 @@ session_start();
 include("conn/clases.php");
 
 if (isset($_SESSION['logueo'])) {
-  $email = $_SESSION['user'];
+  $email = $_SESSION['email'];
   $password = $_SESSION['password'];
   $nombre1 = $_SESSION['nombre1'];
   $nombre2 = $_SESSION['nombre2'];
@@ -12,7 +12,7 @@ if (isset($_SESSION['logueo'])) {
   $fecha_registro = $_SESSION['fecha_registro'];
   $estado = $_SESSION['estado'];
   $fecha_acceso = $_SESSION['fecha_acceso'];
-  $rol = $_SESSION['role'];
+  $rol = $_SESSION['rol'];
   $acceso = $_SESSION['acceso'];
 
   if (isset($_POST['newPassbtn'])) {
