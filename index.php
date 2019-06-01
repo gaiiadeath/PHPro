@@ -1,3 +1,19 @@
+<?php
+if(isset($_COOKIE['contador']))
+  {
+    $uri = $_SERVER['REQUEST_URI'];
+    $uri_index = strpos($uri, 'index.php');
+    if (!$uri_index) {
+	    setcookie('contador', $_COOKIE['contador'] + 1, time() + 7 * 24 * 60 * 60);
+    }
+    echo "Número de visitas:" . $_COOKIE['contador'];
+  }
+  else
+  {
+    setcookie('contador', 1, time() + 7 * 24 * 60 * 60);
+    $mensaje = 'Bienvenido a nuestra página web';
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>

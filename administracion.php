@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION['logueo'])) {
   $email = $_SESSION['user'];
-  $rol = $_SESSION['rol'];
+  $rol = $_SESSION['role'];
   //include("includes/layout/header.php");
   include("conn/clases.php");
   ?>

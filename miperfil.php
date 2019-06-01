@@ -1,5 +1,7 @@
 <?php
 session_start();
+include("conn/clases.php");
+
 if (isset($_SESSION['logueo'])) {
   $email = $_SESSION['user'];
   $password = $_SESSION['password'];
@@ -10,10 +12,8 @@ if (isset($_SESSION['logueo'])) {
   $fecha_registro = $_SESSION['fecha_registro'];
   $estado = $_SESSION['estado'];
   $fecha_acceso = $_SESSION['fecha_acceso'];
-  $rol = $_SESSION['rol'];
+  $rol = $_SESSION['role'];
   $acceso = $_SESSION['acceso'];
-  //include("includes/layout/header.php");
-  include("conn/clases.php");
 
   if (isset($_POST['newPassbtn'])) {
     $pass = $_POST["currPass"];
@@ -45,32 +45,9 @@ if (isset($_SESSION['logueo'])) {
         <strong>La información adicional se ha modificado con éxito </strong>
         </div>
     <?php
-  }/*else{
-      header('Location: /logeo.php');
   }
 
-  if(isset($email)){
-      $sql = "SELECT * FROM usuarios WHERE email = '$email'";
-      $db = new db();
-      $result = $db->db_sql($sql);
-    
-      if(is_object($result)){
-        $row = $result->fetch_assoc();
-
-      $nombre1 = $row['nombre1'];
-      $nombre2 = $row['nombre2'];
-      $apellido1 = $row['apellido1'];
-      $apellido2 = $row['apellido2'];
-      $fecha_registro = $row['fecha_registro'];
-      $estado = $row['estado']? "Activo": "Inactivo";
-      $fecha_acceso = $row['fecha_acceso'];
-      $rol = $row['rol'];
-      }
-  }else{
-      header('Location: /logeo.php');
-  }*/
-
-  ?>
+?>
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -264,3 +241,4 @@ if (isset($_SESSION['logueo'])) {
   echo "Sesión cerrada";
 }
 
+?>
