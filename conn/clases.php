@@ -58,9 +58,17 @@ class seguridad
 	function logueo_sesiones($datos){
 		session_start();
 	    $_SESSION['logueo'] = true;
-	    $_SESSION['user'] = $datos['email'];
+	    $_SESSION['email'] = $datos['email'];
 	    $_SESSION['password'] = $datos['password'];
-	    $_SESSION['role'] = $datos['rol'];
+	    $_SESSION['nombre1'] = $datos['nombre1'];
+	    $_SESSION['nombre2'] = $datos['nombre2'];
+	    $_SESSION['apellido1'] = $datos['apellido1'];
+	    $_SESSION['apellido2'] = $datos['apellido2'];
+	    $_SESSION['fecha_registro'] = $datos['fecha_registro'];
+	    $_SESSION['estado'] = $datos['estado'];
+	    $_SESSION['acceso'] = $datos['acceso'];
+	    $_SESSION['fecha_acceso'] = $datos['fecha_acceso'];
+	    $_SESSION['rol'] = $datos['rol'];
 	    $_SESSION['tiempo_logueo'] = time();
 	    $_SESSION['tiempo_permitido'] = 20;
 	    setcookie('email',$datos['email'],time()+10);
